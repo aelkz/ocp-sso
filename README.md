@@ -1,5 +1,7 @@
 # Red Hat Openshift Single Sign-On Secured N-tier application
 
+### [pt-br version](./README.pt-br.md)
+
 This project contains scripts and source to deploy a 3 tier application along with [Red Hat Single Sign-On](https://access.redhat.com/products/red-hat-single-sign-on) and secures the application with SSL.
 
 The application has a [node.js](https://nodejs.org/en/) run [Angular](https://angular.io/) frontend (tier 1) that calls a 
