@@ -4,13 +4,13 @@
 #nodejs #java #eap #openshift #security #keycloak #oidc #redhat
 ```
 
-Este projeto contém scripts e código-fonte para implantar uma aplicação de 3 camadas utilizando o [Red Hat Single Sign-On](https://access.redhat.com/products/red-hat-single-sign-on) e protegendo a aplicação com SSL.
+Este projeto contém scripts e códigos-fonte para implantar uma aplicação de 3 camadas utilizando o [Red Hat Single Sign-On](https://access.redhat.com/products/red-hat-single-sign-on) e protegendo-a com SSL.
 
-A aplicação possui uma [node.js](https://nodejs.org/en/) app [Angular](https://angular.io/) frontend (tier 1) que realiza a chamada para uma app [Spring Boot](http://spring.io/projects/spring-boot) REST back-end (tier 2) e uma app [JBoss EAP](https://access.redhat.com/products/red-hat-jboss-enterprise-application-platform/) REST back-end (tier 2) que persistirá dados para um [Postgresql](https://www.postgresql.org/) banco de dados (tier 3).
+A aplicação é distribuída em uma app [node.js](https://nodejs.org/en/) + [Angular](https://angular.io/) frontend (tier 1) que realiza a chamada para uma app [Spring Boot](http://spring.io/projects/spring-boot) REST back-end (tier 2) e uma app [JBoss EAP](https://access.redhat.com/products/red-hat-jboss-enterprise-application-platform/) REST back-end (tier 2) que irá persistir dados para uma instância de banco de dados (tier 3) [Postgresql](https://www.postgresql.org/).
 
-A implantação do Red Hat Single Sign-On protege este cenário de aplicações através de um realm chamado **java-js-realm**. O realm contém clients configurados para o público que enxergam o frontend (js) e o back-end do tipo bearer only (eap). O objetivo é simples e trata apenas de garantir que **um usuário válido está devidamente logado**.
+A implantação do Red Hat Single Sign-On irá atuar na proteção deste cenário através de um realm chamada **java-js-realm**. A realm irá conter clients configurados para o público que enxergam o frontend (js) e o back-end do tipo bearer only (eap). O objetivo deste cenário é simples e se trata apenas de garantir que **um usuário válido está devidamente logado**.
 
-Todos os scripts que irão auxiliar o deployment das aplicações exigem que você já esteja logado utlizando o cli da instância do cluster openshift [oc](https://docs.openshift.com/container-platform/3.10/cli_reference/get_started_cli.html) [Openshift](https://www.openshift.com/) ou [minishift](https://www.okd.io/minishift/)
+Todos os scripts que irão auxiliar o deployment das aplicações requerem que você já esteja devidamente autenticado utlizando o cli da instância do cluster openshift [oc](https://docs.openshift.com/container-platform/3.10/cli_reference/get_started_cli.html) [openshift](https://www.openshift.com/) ou [minishift](https://www.okd.io/minishift/)
 
 Exemplo: `oc login -u developer`
 
@@ -18,9 +18,10 @@ Exemplo: `oc login -u developer`
 
 ## Deploy Red Hat Single Sign-On
 
-Navegue para o diretório `sso` e execute o script `ocp-deploy-sso.sh`. Uma vez finalizado sua execução você irá visualizar os pods criados no projeto **SSO N-tier**.
+Navegue para o diretório `sso` e execute o script `ocp-deploy-sso.sh`.
+Uma vez finalizado a execução você irá visualizar os pods criados no projeto **SSO N-tier**.
 
-Os dados para login do console administrativo do RH-SSO é **admin/Redhat1!**
+Os dados para login do console administrativo do RH-SSO são **admin/Redhat1!**
 
 OBS. Talvez seja necessário importar as imagens oficiais do Red Hat Single Sign-On caso não existam no registry do OCP. Para isso, execute o script `ocp-install-templates.sh` que se encontra no diretório de instalação `sso`.
 
