@@ -6,7 +6,7 @@
 
 Este projeto contém scripts e códigos-fonte para implantar uma aplicação de 3 camadas utilizando o [Red Hat Single Sign-On](https://access.redhat.com/products/red-hat-single-sign-on) e protegendo-a com SSL.
 
-A aplicação é distribuída em uma app [node.js](https://nodejs.org/en/) + [Angular](https://angular.io/) frontend (tier 1) que realiza a chamada para uma app [Spring Boot](http://spring.io/projects/spring-boot) REST back-end (tier 2) e uma app [JBoss EAP](https://access.redhat.com/products/red-hat-jboss-enterprise-application-platform/) REST back-end (tier 2) que irá persistir dados para uma instância de banco de dados (tier 3) [Postgresql](https://www.postgresql.org/).
+A aplicação é distribuída em uma app frontend (tier 1) [node.js](https://nodejs.org/en/) + [Angular](https://angular.io/) que realiza a chamada para uma app back-end REST (tier 2) [Spring Boot](http://spring.io/projects/spring-boot) e uma app back-end REST (tier 2) [JBoss EAP](https://access.redhat.com/products/red-hat-jboss-enterprise-application-platform/) que irá persistir dados para uma instância de banco de dados (tier 3) [Postgresql](https://www.postgresql.org/).
 
 A implantação do Red Hat Single Sign-On irá atuar na proteção deste cenário através de um realm chamada **java-js-realm**. A realm irá conter clients configurados para o público que enxergam o frontend (js) e o back-end do tipo bearer only (eap). O objetivo deste cenário é simples e se trata apenas de garantir que **um usuário válido está devidamente logado**.
 
