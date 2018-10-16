@@ -1,5 +1,9 @@
 # Red Hat Openshift Single Sign-On Secured N-tier application
 
+```
+#nodejs #java #eap #openshift #security #keycloak #oidc #redhat
+```
+
 Este projeto contém scripts e código-fonte para implantar uma aplicação de 3 camadas utilizando o [Red Hat Single Sign-On](https://access.redhat.com/products/red-hat-single-sign-on) e protegendo a aplicação com SSL.
 
 A aplicação possui uma [node.js](https://nodejs.org/en/) app [Angular](https://angular.io/) frontend (tier 1) que realiza a chamada para uma app [Spring Boot](http://spring.io/projects/spring-boot) REST back-end (tier 2) e uma app [JBoss EAP](https://access.redhat.com/products/red-hat-jboss-enterprise-application-platform/) REST back-end (tier 2) que persistirá dados para um [Postgresql](https://www.postgresql.org/) banco de dados (tier 3).
@@ -10,6 +14,8 @@ Todos os scripts que irão auxiliar o deployment das aplicações exigem que voc
 
 Exemplo: `oc login -u developer`
 
+![screenshot](./screenshots/summary.png)
+
 ## Deploy Red Hat Single Sign-On
 
 Navegue para o diretório `sso` e execute o script `ocp-deploy-sso.sh`. Uma vez finalizado sua execução você irá visualizar os pods criados no projeto **SSO N-tier**.
@@ -18,20 +24,25 @@ Os dados para login do console administrativo do RH-SSO é **admin/Redhat1!**
 
 OBS. Talvez seja necessário importar as imagens oficiais do Red Hat Single Sign-On caso não existam no registry do OCP. Para isso, execute o script `ocp-install-templates.sh` que se encontra no diretório de instalação `sso`.
 
+![screenshot](./screenshots/sso.png)
+
 Caso já existam, os templates poderão ser substituídos pelos novos que se encontram no repositório do github, atualmente no endereço [RH-SSO Templates](https://github.com/jboss-container-images/redhat-sso-7-openshift-image/tree/sso72-dev/templates)
 
 ### Set the Public Key in the config map
 
 Certifique-se que a instância do RH-SSO está ativa. Uma vez que a instância estiver UP você irá precisar modificar o [config map](https://docs.openshift.com/container-platform/3.10/dev_guide/configmaps.html) utilizado pelo back-end do JBoss EAP para se comunicar com o Red Hat Single Sign-On.
 
-`
 * Acesse o console administrativo do RH-SSO. As credenciais para acesso são **admin/Redhat1!**
 
 * No **console administrativo do RH-SSO**, navegue para a **java-js-realm**, na aba **keys** e selecione **Public Key** na chave **RSA** e guarde o valor gerado na popup em um bloco de notas para utilização futura.
 
+![screenshot](./screenshots/key.png)
+
 * Retorne para o console administrativo do Openshift. No projeto **SSO N-Tier**, navegue para **Resources** e depois **Config Maps**
 
 * Edite o config-map **ntier-config** e copie o valor copiado no bloco de notas previamente para a entrada **PUBLIC_KEY** (Previamente definido com o valor **changeme**)
+
+![screenshot](./screenshots/config.png)
 
 ## Deploy JBoss EAP and Postgresql
 
@@ -60,6 +71,8 @@ Efetue o acesso ao console administrativo do RH-SSO. Utilize as credenciais **ad
 * Informe o valor `*` em **Web Origins** (Access-Control-Allow-Origin: *) Maiores detalhes sobre CORS poderão ser vistos em [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)  
 * Selecione a opção **save**
 
+![screenshot](./screenshots/js.png)
+
 ## Java Client (back-end bearer-only)
 
 * Acesse a realm **java-js-realm**, selecione o item de menu **clients**, e acione o botão **create**
@@ -87,3 +100,4 @@ Ao acessar a aplicação, você será capaz de visualizar os atributos do usuár
 
 Utilizando os itens de menu **Status** e **Cars** você será capaz de realizar chamadas para a aplicação JBoss EAP back-end REST.
 
+![screenshot](./screenshots/test.png)

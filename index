@@ -1,0 +1,7 @@
+git remote add origin https://github.com/aelkz/ocp-sso.git
+
+git add *
+
+git commit * -m "Initial Release"
+
+git push -f origin master
