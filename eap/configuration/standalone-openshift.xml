@@ -70,7 +70,7 @@
                 <json-formatter name="json-formatter"/>
             </formatters>
             <handlers>
-                <file-handler name="file" formatter="json-formatter" path="audit-log.log" relative-to="jboss.server.data.dir"/>
+                <periodic-rotating-file-handler name="file" formatter="json-formatter" path="${jboss.persistent.log.dir}/audit-log-${jboss.node.name}-jboss.log" suffix=".yyyy-MM-dd"/>
             </handlers>
             <logger log-boot="true" log-read-only="false" enabled="false">
                 <handlers>
@@ -108,6 +108,9 @@
                 </formatter>
                 <file relative-to="jboss.server.log.dir" path="server.log"/>
                 <suffix value=".yyyy-MM-dd"/>
+                <formatter>
+                    <named-formatter name="OPENSHIFT"/>
+                </formatter>
                 <append value="true"/>
             </periodic-rotating-file-handler>
             <logger category="com.arjuna">
@@ -126,6 +129,15 @@
                     <handler name="FILE"/>
                 </handlers>
             </root-logger>
+            <formatter name="OPENSHIFT">
+                <json-formatter>
+                    <exception-output-type value="formatted"/>
+                    <key-overrides timestamp="@timestamp"/>
+                    <meta-data>
+                        <property name="@version" value="1"/>
+                    </meta-data>
+                </json-formatter>
+            </formatter>
             <formatter name="PATTERN">
                 <pattern-formatter pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n"/>
             </formatter>
@@ -192,7 +204,12 @@
                     <managed-scheduled-executor-service name="default" jndi-name="java:jboss/ee/concurrency/scheduler/default" context-service="default" hung-task-threshold="60000" keepalive-time="3000"/>
                 </managed-scheduled-executor-services>
             </concurrent>
-            <default-bindings context-service="java:jboss/ee/concurrency/context/default" datasource="java:/PostgreSQLDS" jms-connection-factory="java:jboss/DefaultJMSConnectionFactory" managed-executor-service="java:jboss/ee/concurrency/executor/default" managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default" managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>
+            <default-bindings context-service="java:jboss/ee/concurrency/context/default"
+                              datasource="##DEFAULT_DATASOURCE##"
+                              jms-connection-factory="java:jboss/DefaultJMSConnectionFactory"
+                              managed-executor-service="java:jboss/ee/concurrency/executor/default"
+                              managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default"
+                              managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:ee-security:1.0"/>
         <subsystem xmlns="urn:jboss:domain:ejb3:5.0">
@@ -203,10 +220,12 @@
                 <stateful default-access-timeout="5000" cache-ref="simple" passivation-disabled-cache-ref="simple"/>
                 <singleton default-access-timeout="5000"/>
             </session-bean>
+            <!--
             <mdb>
                 <resource-adapter-ref resource-adapter-name="${ejb.resource-adapter-name:activemq-ra-remote}"/>
                 <bean-instance-pool-ref pool-name="mdb-strict-max-pool"/>
             </mdb>
+            -->
             <pools>
                 <bean-instance-pools>
                     <strict-max-pool name="mdb-strict-max-pool" derive-size="from-cpu-count" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
@@ -550,6 +569,9 @@
         <interface name="public">
             <inet-address value="${jboss.bind.address:127.0.0.1}"/>
         </interface>
+        <interface name="private">
+            <inet-address value="${jboss.bind.address.private:127.0.0.1}"/>
+        </interface>
         <interface name="unsecure">
             <inet-address value="${jboss.bind.address.unsecure:127.0.0.1}"/>
         </interface>
@@ -574,10 +596,7 @@
         </outbound-socket-binding>
         -->
         <outbound-socket-binding name="messaging-remote-throughput">
-            <remote-destination host="${jboss.messaging.host:localhost}" port="${jboss.http.port:8080}"/>
-        </outbound-socket-binding>
-        <outbound-socket-binding name="http-messaging">
-            <remote-destination host="${jboss.messaging.host:localhost}" port="${jboss.http.port:8080}"/>
+            <remote-destination host="${jboss.messaging.host:localhost}" port="61616"/>
         </outbound-socket-binding>
     </socket-binding-group>
 </server>
