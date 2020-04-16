@@ -562,8 +562,11 @@
         <outbound-socket-binding name="mail-smtp">
             <remote-destination host="localhost" port="25"/>
         </outbound-socket-binding>
+        <!-- 
+        example of using AMQ Broker in the same openshift namespace.
         <outbound-socket-binding name="messaging-remote-throughput">
             <remote-destination host="broker-amq-headless.raa-ntier.svc.cluster.local" port="61616"/>
         </outbound-socket-binding>
+        -->
     </socket-binding-group>
 </server>
