@@ -149,11 +149,11 @@
         <subsystem xmlns="urn:jboss:domain:datasources:5.0">
             <datasources>
                 <datasource jta="true" jndi-name="java:/PostgreSQLDS" pool-name="PostgreSQLDS" enabled="true" use-ccm="false">
-                    <connection-url>java:jdbc:postgresql://postgresql.raa-ntier.svc.cluster.local:5432/${env.DATABASE_NAME}</connection-url>
+                    <connection-url>jdbc:postgresql://postgresql.raa-ntier.svc.cluster.local:5432/${env.PG_DATABASE}</connection-url>
                     <driver>postgresql</driver>
                     <security>
-                        <user-name>${env.DATABASE_USER}</user-name>
-                        <password>${env.DATABASE_PASSWORD}</password>
+                        <user-name>${env.PG_USERNAME}</user-name>
+                        <password>${env.PG_PASSWORD}</password>
                     </security>
                     <validation>
                         <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker"/>
