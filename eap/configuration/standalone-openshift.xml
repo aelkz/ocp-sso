@@ -592,6 +592,9 @@
             <remote-destination host="broker-amq-headless.raa-ntier.svc.cluster.local" port="61616"/>
         </outbound-socket-binding>
         -->
+        <outbound-socket-binding name="http-messaging">
+            <remote-destination host="${jboss.messaging.host:localhost}" port="${jboss.http.port:8080}"/>
+        </outbound-socket-binding>
         <outbound-socket-binding name="messaging-remote-throughput">
             <remote-destination host="${jboss.messaging.host:localhost}" port="61616"/>
         </outbound-socket-binding>
