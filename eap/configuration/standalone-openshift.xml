@@ -432,7 +432,9 @@
                 <http-connector name="http-connector-throughput" socket-binding="http" endpoint="http-acceptor-throughput">
                     <param name="batch-delay" value="50"/>
                 </http-connector>
+                <!--
                 <remote-connector name="netty-remote-throughput" socket-binding="messaging-remote-throughput"/>
+                -->
                 <in-vm-connector name="in-vm" server-id="0">
                     <param name="buffer-pooling" value="false"/>
                 </in-vm-connector>
