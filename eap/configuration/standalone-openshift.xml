@@ -428,13 +428,11 @@
                     <role name="guest" send="true" consume="true" create-non-durable-queue="true" delete-non-durable-queue="true"/>
                 </security-setting>
                 <address-setting name="#" dead-letter-address="jms.queue.DLQ" expiry-address="jms.queue.ExpiryQueue" max-size-bytes="10485760" page-size-bytes="2097152" message-counter-history-day-limit="10"/>
-                <http-connector name="http-connector" socket-binding="http" endpoint="http-acceptor"/>
+                <http-connector name="http-connector" socket-binding="http-messaging" endpoint="http-acceptor"/>
                 <http-connector name="http-connector-throughput" socket-binding="http" endpoint="http-acceptor-throughput">
                     <param name="batch-delay" value="50"/>
                 </http-connector>
-                <!--
                 <remote-connector name="netty-remote-throughput" socket-binding="messaging-remote-throughput"/>
-                -->
                 <in-vm-connector name="in-vm" server-id="0">
                     <param name="buffer-pooling" value="false"/>
                 </in-vm-connector>
@@ -575,5 +573,8 @@
             <remote-destination host="broker-amq-headless.raa-ntier.svc.cluster.local" port="61616"/>
         </outbound-socket-binding>
         -->
+        <outbound-socket-binding name="http-messaging">
+            <remote-destination host="${jboss.messaging.host:localhost}" port="${jboss.http.port:8080}"/>
+        </outbound-socket-binding>
     </socket-binding-group>
 </server>
