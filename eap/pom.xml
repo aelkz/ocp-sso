@@ -85,6 +85,9 @@
         <version.war.plugin>2.1.1</version.war.plugin>
         <version.resteasy>3.0.25.Final-redhat-1</version.resteasy>
 
+        <version.jboss.bom>8.2.1.Final</version.jboss.bom>
+        <version.wildfly>9.0.0.Alpha1</version.wildfly>
+
         <!-- maven-compiler-plugin -->
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -101,7 +104,7 @@
             <dependency>
                 <groupId>org.jboss.bom</groupId>
                 <artifactId>jboss-eap-javaee7-with-tools</artifactId>
-                <version>${version.jboss.bom.eap}</version>
+                <version>${version.jboss.bom}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
