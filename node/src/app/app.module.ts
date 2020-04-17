@@ -4,8 +4,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {CardModule, EmptyStateModule, NotificationService, TableModule, ToastNotificationListModule, VerticalNavigationModule} from 'patternfly-ng';
 import {BreadcrumbsModule} from '@exalif/ngx-breadcrumbs';
 import {NgModule} from '@angular/core';
-
-
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {NavComponent} from './nav/nav.component';
@@ -24,9 +22,7 @@ export function jwtOptionsFactory(keycloakService) {
       return keycloakService.getToken();
     }
   };
-
 }
-
 
 @NgModule({
   declarations: [
