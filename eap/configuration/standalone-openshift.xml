@@ -56,7 +56,7 @@
             <security-realm name="ApplicationRealm">
                 <server-identities>
                     <ssl>
-                        <keystore  path="/etc/eap-secret-volume/keystore.jks" keystore-password="123456"/>
+                        <keystore path="application.keystore" relative-to="jboss.server.config.dir" keystore-password="password" alias="server" key-password="password" generate-self-signed-certificate-host="localhost"/>
                     </ssl>
                 </server-identities>
                 <authentication>
@@ -583,7 +583,7 @@
             <inet-address value="${jboss.bind.address.unsecure:127.0.0.1}"/>
         </interface>
     </interfaces>
-    <socket-binding-group name="standard-sockets" default-interface="public" port-offset="${jboss.socket.binding.port-offset:200}">
+    <socket-binding-group name="standard-sockets" default-interface="public" port-offset="${jboss.socket.binding.port-offset:0}">
         <socket-binding name="management-http" interface="management" port="${jboss.management.http.port:9990}"/>
         <socket-binding name="management-https" interface="management" port="${jboss.management.https.port:9993}"/>
         <socket-binding name="ajp" port="${jboss.ajp.port:8009}"/>
