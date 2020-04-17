@@ -602,6 +602,9 @@
         <interface name="private">
             <inet-address value="${jboss.bind.address.private:127.0.0.1}"/>
         </interface>
+        <interface name="unsecure">
+            <inet-address value="${jboss.bind.address.unsecure:127.0.0.1}"/>
+        </interface>
         <interface name="bindall">
             <inet-address value="0.0.0.0"/>
         </interface>
