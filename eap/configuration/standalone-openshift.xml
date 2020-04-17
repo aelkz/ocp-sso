@@ -378,11 +378,6 @@
             <initializers security="identity" transactions="spec"/>
             <security server-requires-ssl="false" client-requires-ssl="false"/>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:iiop-openjdk:2.1">
-            <orb socket-binding="iiop"/>
-            <initializers security="identity" transactions="spec"/>
-            <security server-requires-ssl="false" client-requires-ssl="false"/>
-        </subsystem>
         <subsystem xmlns="urn:jboss:domain:infinispan:7.0">
             <cache-container name="server" aliases="singleton cluster" default-cache="default" module="org.wildfly.clustering.server">
                 <transport lock-timeout="60000"/>
