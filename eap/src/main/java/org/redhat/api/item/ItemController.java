@@ -2,7 +2,6 @@ package org.redhat.api.item;
 
 import java.util.HashMap;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,30 +21,25 @@ public class ItemController {
 
 	@GET
 	public List<ItemModel> getAllItems() {
-				
 		List<ItemModel> items = itemService.findAll();
-		
 		return items;
 	}
 	
 	@GET
 	@Path("/{id}")
 	public ItemModel getItem(@PathParam("id") String id) {
-		
 		ItemModel item = itemService.findById(id);
 		return item;
 	}
 
 	@POST
 	public ItemModel createItem(ItemModel item) {
-		
 		ItemModel savedItem = itemService.createItem(item);
 		return savedItem;
 	}
 	
 	@PUT
 	public ItemModel updateItem(ItemModel item) {
-		
 		ItemModel updatedItem = itemService.updateItem(item);
 		return updatedItem;
 	}
@@ -53,10 +47,8 @@ public class ItemController {
 	@DELETE
 	@Path("/{id}")
 	public HashMap<String,Boolean> deleteItem(@PathParam("id") String id) {
-		
 		HashMap<String,Boolean> status = new HashMap<String,Boolean>();
 		status.put("isDeleted", itemService.deleteItem(id));
-
 		return status;
 	}
 

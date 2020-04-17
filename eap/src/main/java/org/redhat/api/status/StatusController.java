@@ -7,7 +7,6 @@ import javax.ws.rs.core.MediaType;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
-
 @Path("status")
 @Produces(MediaType.APPLICATION_JSON)
 public class StatusController {
