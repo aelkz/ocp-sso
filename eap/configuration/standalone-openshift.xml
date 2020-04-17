@@ -294,13 +294,6 @@
                 </stack>
             </stacks>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:modcluster:5.0">
-            <proxy name="default" advertise-socket="modcluster" listener="ajp">
-                <dynamic-load-provider>
-                    <load-metric type="cpu"/>
-                </dynamic-load-provider>
-            </proxy>
-        </subsystem>
         <subsystem xmlns="urn:wildfly:elytron:4.0" final-providers="combined-providers" disallowed-providers="OracleUcrypto">
             <providers>
                 <aggregate-providers name="combined-providers">
@@ -478,6 +471,13 @@
             <mail-session name="default" jndi-name="java:jboss/mail/Default">
                 <smtp-server outbound-socket-binding-ref="mail-smtp"/>
             </mail-session>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:modcluster:5.0">
+            <proxy name="default" advertise-socket="modcluster" listener="ajp">
+                <dynamic-load-provider>
+                    <load-metric type="cpu"/>
+                </dynamic-load-provider>
+            </proxy>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:messaging-activemq:4.0">
             <server name="default">
