@@ -1,5 +1,5 @@
 {
-  "realm": "REDHAT",
+  "realm": "${env.REALM}",
   "bearer-only": true,
   "auth-server-url": "${env.AUTH_URL}",
   "ssl-required": "external",

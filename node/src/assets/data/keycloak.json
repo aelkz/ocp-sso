@@ -1,5 +1,5 @@
 {
-  "realm": "REDHAT",
+  "realm": "replaced at runtime",
   "auth-server-url": "replaced at runtime",
   "ssl-required": "external",
   "resource": "js",

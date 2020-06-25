@@ -4,14 +4,14 @@
 
 This project contains scripts and source to deploy a 3 tier application along with [Red Hat Single Sign-On](https://access.redhat.com/products/red-hat-single-sign-on) and secures the application with SSL.
 
-The application has a [node.js](https://nodejs.org/en/) run [Angular](https://angular.io/) frontend (tier 1) that calls a 
-[Spring Boot](http://spring.io/projects/spring-boot) REST backend (tier 2) and a 
+The application has a [node.js](https://nodejs.org/en/) run [Angular](https://angular.io/) frontend (tier 1) that calls a
+[Spring Boot](http://spring.io/projects/spring-boot) REST backend (tier 2) and a
 [JBoss EAP](https://access.redhat.com/products/red-hat-jboss-enterprise-application-platform/) REST backend (tier 2) that persists data
 to a [Postgresql](https://www.postgresql.org/) database (tier 3).
 The Red Hat Single Sign-On deployment secures this deployed via a configured realm called **java-js-realm**.  The realm contains
 configured clients for the public facing frontend (js) and the bearer only backend (eap). The security is simple and only checks that a **valid user is logged in**
 
-All of the scripts to help deploy require that you are logged in via the [oc](https://docs.openshift.com/container-platform/3.10/cli_reference/get_started_cli.html) command line tool to 
+All of the scripts to help deploy require that you are logged in via the [oc](https://docs.openshift.com/container-platform/3.10/cli_reference/get_started_cli.html) command line tool to
 a [Openshift](https://www.openshift.com/) cluster or [minishift](https://www.okd.io/minishift/) instance
 
 Example: `oc login -u developer`
@@ -56,13 +56,13 @@ In the `node` folder run the `ocp-deploy-node.sh` script.
 
 ## Configure Clients
 
-While the builds are running you can configure the clients in RH-SSO. 
+While the builds are running you can configure the clients in RH-SSO.
 
 ### JS Client
 * In the **java-js-realm**, select **clients**, then **create**
 * Set **Client ID** to **js**, then select **save**
 * Set **Valid Redirect URIs** to the route of your node.js instance plus **/***.  Example: `https://nodejs-app-ntier.192.168.42.24.nip.io/*`
-* Set **Web Origins** to `*` 
+* Set **Web Origins** to `*`
 * Select **save**
 
 ![screenshot](./screenshots/js.png)
@@ -72,7 +72,7 @@ While the builds are running you can configure the clients in RH-SSO.
 * Set **Client ID** to **java**, then select **save**
 * Set **Access Type** to **bearer-only**
 * Select **save**
- 
+
 ## Create User
 
 * In the **java-js-realm**, select **Users**, then **Add User**

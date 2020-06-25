@@ -13,4 +13,5 @@ build
 .settings
 /out/
 !/.idea/
-/.idea/
+.registry-secret.yaml
+/eap/.idea/
