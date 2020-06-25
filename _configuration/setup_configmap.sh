@@ -16,18 +16,14 @@ function setup_rhsso() {
 	local RHSSO_NAMESPACE=$1
 	local RHSSO_ROUTE=$2
 	local OCP_WILDCARD_DOMAIN=$3
-	local SSO_MASTER_REALM_USERNAME=$4
-	local SSO_MASTER_REALM_PASSWORD=$5
-
 	local SSO_URL=$(oc get route ${RHSSO_ROUTE} -n ${RHSSO_NAMESPACE} --template='{{ .spec.host }}')
 	local SSO_REALM=NTIER
 	local SSO_AUTH_URL=https://${SSO_URL}/auth
 	local SSO_MASTER_TOKEN_URL=https://${SSO_URL}/auth/realms/master/protocol/openid-connect/token
 	local SSO_TOKEN_URL=https://${SSO_URL}/auth/realms/${SSO_REALM}/protocol/openid-connect/token
 	local SSO_REALM_KEYS_URL=https://${SSO_URL}/auth/admin/realms/${SSO_REALM}/keys
-
-	local SSO_REALM_USERNAME=admin
-	local SSO_REALM_PASSWORD=12345
+	local SSO_REALM_USERNAME=$4
+	local SSO_REALM_PASSWORD=$5
 
 	local TKN=$(curl -v -k -X POST $SSO_TOKEN_URL \
 	 -H "Content-Type: application/x-www-form-urlencoded" \
@@ -60,5 +56,4 @@ function setup_rhsso() {
       --from-literal=PG_PASSWORD=pgpass
 }
 
-# test_rhsso $1 $2 $3 $4 $5
 setup_rhsso $1 $2 $3 $4 $5
