@@ -14,7 +14,7 @@ Todos os scripts que irão auxiliar o deployment das aplicações requerem que v
 
 Exemplo: `oc login -u developer`
 
-![screenshot](./screenshots/summary.png)
+![screenshot](./_documentation/screenshots/summary.png)
 
 ## Deploy Red Hat Single Sign-On
 
@@ -25,7 +25,7 @@ Os dados para login do console administrativo do RH-SSO são **admin/Redhat1!**
 
 **OBS**. Talvez seja necessário importar as imagens oficiais do Red Hat Single Sign-On caso não existam no registry do OCP. Para isso, execute o script `ocp-install-templates.sh` que se encontra no diretório de instalação `sso`.
 
-![screenshot](./screenshots/sso.png)
+![screenshot](./_documentation/screenshots/sso.png)
 
 Caso já existam, os templates poderão ser substituídos pelos novos que se encontram no repositório do github, atualmente no endereço [RH-SSO Templates](https://github.com/jboss-container-images/redhat-sso-7-openshift-image/tree/sso72-dev/templates)
 
@@ -37,13 +37,13 @@ Certifique-se que a instância do RH-SSO está ativa (running). Uma vez que a in
 
 * No **console administrativo do RH-SSO**, navegue para a **java-js-realm**, na aba **keys** e selecione **Public Key** na chave **RSA** e guarde o valor gerado na popup em um bloco de notas para utilização futura.
 
-![screenshot](./screenshots/key.png)
+![screenshot](./_documentation/screenshots/key.png)
 
 * Retorne para o console administrativo do Openshift.<br>No projeto **SSO N-Tier**, navegue para **Resources** e depois em **Config Maps**
 
 * Edite o config-map **ntier-config** e copie o valor previamente copiado no bloco de notas para a entrada **PUBLIC_KEY** (previamente definido com o valor **changeme**)
 
-![screenshot](./screenshots/config.png)
+![screenshot](./_documentation/screenshots/config.png)
 
 ## Deploy JBoss EAP and Postgresql
 
@@ -74,7 +74,7 @@ Lembre-se de utilizar as credenciais **admin/Redhat1!**
 * Informe o valor `*` em **Web Origins** (Access-Control-Allow-Origin: *). Maiores detalhes sobre CORS poderão ser vistos em [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)  
 * Selecione a opção **save**
 
-![screenshot](./screenshots/js.png)
+![screenshot](./_documentation/screenshots/js.png)
 
 ## Java Client (back-end bearer-only)
 
@@ -103,4 +103,4 @@ Ao acessar a aplicação, você será capaz de visualizar os atributos do usuár
 
 Utilizando os itens de menu **Status** e **Cars** você será capaz de realizar chamadas para a aplicação JBoss EAP back-end REST.
 
-![screenshot](./screenshots/test.png)
+![screenshot](./_documentation/screenshots/test.png)
